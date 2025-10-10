@@ -473,15 +473,15 @@ general concept of "marine protected areas" (MPAs) [@carr2019;
 restricted or prohibited to promote biodiversity conservation and
 potentially achieve other complementary objectives
 [@grorud-colvert2021]. These objectives can include preserving cultural
-heritage, rebuilding populations inside borders, providing conservation
-benefits outside borders, and supporting fisheries in surrounding waters
-[@gaines2010]. International movements such as the Montreal–Kunming
-Global Biodiversity Framework's call for protection of 30% of the
-oceans, and the Agreement under the United Nations Convention on the Law
-of the Sea on the Conservation and Sustainable Use of Marine Biological
-Diversity of Areas Beyond National Jurisdiction (the High Seas Treaty or
-BBNJ) have provided substantial momentum for the expanded use of MPAs in
-the world's oceans in pursuit of these goals.
+heritage, rebuilding populations inside protected borders, providing
+conservation benefits outside in fished waters, and supporting
+surrounding fisheries [@gaines2010]. International movements such as the
+Montreal–Kunming Global Biodiversity Framework's call for protection of
+30% of the oceans, and the Agreement under the United Nations Convention
+on the Law of the Sea on the Conservation and Sustainable Use of Marine
+Biological Diversity of Areas Beyond National Jurisdiction (the High
+Seas Treaty or BBNJ) have provided substantial momentum for the expanded
+use of MPAs in the world's oceans in pursuit of these goals.
 
 Over 9% of the ocean is now covered by MPAs (as of October 2025; [World
 Database of Protected Areas](https://www.protectedplanet.net/en)), and
@@ -501,43 +501,41 @@ MPA borders compared to those farther away [i.e., gradients,
 both before and after MPA implementation [i.e.,
 before-after-control-impact or BACI; @medoff2022; @lynham2024;
 @kerr2019], or incorporate spatial replication or additional controls to
-control for other potential confounders [@ferraro2018; @larsen2019;
-@byrnes2025; @ovando2021].
+account for other potential confounders [@ferraro2018; @larsen2019;
+@ovando2021].
 
 While these empirical indicators differ in their complexity, each is
-designed to determine the effect of the MPA on a particular observed
-metric: higher biomass in MPAs compared to unprotected areas is
+presumably intended to determine the effect of the MPA on a particular
+observed metric: higher biomass in MPAs compared to unprotected areas is
 interpreted as conservation gains within MPA borders [@smith2024b;
-@lester2009], while gradients in fisheries catch or effort signal
-evidence of spillover from the MPA, where the movement of larvae or
-post-recruit animals out from MPAs leads to subsequent increases in
+@lester2009], while gradients in fisheries catch or effort are thought
+to signal evidence of spillover of adult or larval fish from the MPA to
 surrounding waters [@halpern2009; @medoff2022; @lynham2024;
 @roberts2001]. However, these indicator results are sometimes then
 assumed to also imply evidence for an unobserved effect, such as changes
 in total population size or total fisheries catch.
 
-The assumption that specific indicators can stand in for broader
-ecological or social effects is rarely tested directly, despite their
-widespread use. Some indicators may align closely with some MPA effects
-under certain conditions, while others may fail to capture relevant
-dynamics or produce misleading results. Understanding the reliability of
-indicators, and the variability of the underlying MPA effects they aim
-to measure, is critical for interpreting existing evaluations, designing
-effective monitoring strategies, and making evidence-informed policy
-decisions.
+The assumption that specific indicators can stand in for broader and
+harder to observe ecological or social effects is rarely tested
+directly, despite their widespread use. Some indicators may align
+closely with some MPA effects under certain conditions, while others may
+fail to capture relevant dynamics or produce misleading results.
+Understanding the reliability of indicators, and the variability of the
+underlying MPA effects they aim to measure, is critical for interpreting
+existing evaluations, designing effective monitoring strategies, and
+making evidence-informed policy decisions.
 
 As MPA usage expands around the world, establishing expectations around
-potential MPA effects and our ability to accurately measuring their
-performance is essential to tracking progress towards outcomes achieved,
-not just area protected. To that end, this paper addresses two
-questions. We first analysed whether MPA effects on conservation and
-catches are potentially variable enough to justify the need for
-empirical monitoring. We then tested the ability of several commonly
-used empirical indicators to reflect the actual effects of MPAs. We
-found that MPAs can have highly variable effects on conservation and
-catches depending on the specific dynamics of the system in question,
-and that while some indicators reliably track this variability in some
-MPA effects, many do not.
+potential MPA effects and our ability to accurately measure them is
+essential to tracking progress towards outcomes achieved, not just area
+protected. To that end, this paper addresses two questions. We first
+analysed whether MPA effects on conservation and catches are likely to
+be variable enough to justify the need for empirical monitoring. We then
+tested the ability of several commonly used empirical indicators to
+reflect the actual effects of MPAs. We found that MPAs can have highly
+variable effects on conservation and catches depending on the specific
+dynamics of the system in question, and that while some indicators
+reliably track this variability in some MPA effects, many do not.
 
 ## Methods
 
@@ -587,22 +585,25 @@ tuna (*Thunnus albacares*), shark (*Carcharhinus falciformis*), grouper
 (*Epinephelus fuscoguttatus*), and reef fish (*Seriola
 quinqueradiata*)*.* Fixed parameters included those relating to growth,
 mortality, fecundity, recruitment, and movement, with values for each
-species based on available literature and expert judgement (@tbl-fixed).
-We fixed these parameters in order to not create unrealistic
-combinations of for example growth and mortality [@prince2015a].
+species based on available literature and our own judgement
+(@tbl-fixed). We fixed these parameters in order to not create
+unrealistic combinations of for example growth and mortality
+[@prince2015a].
 
 One of the key features of this model is the ability to simulate fish
-movement across the 2D seascape through both passive diffusion and
-active taxis in response to habitat gradients, in the manner of
-@thorson2021a. Empirical estimates of movement rates in the same units
-as those used in our simulation model were not readily available. As
-such, we fixed movement rates of recruits and post-recruit fish such
-that 95% of animals were within a given linear distance of their point
-of origin after one year. We grouped these distances into low (2.5km),
-medium (25km), or high (250km) dispersal distances, and assigned these
-dispersal distances to the recruit and post-recruit life stages of each
-of our simulated species based on our best judgement and a desire to
-reflect a range of movement dynamics (@tbl-fixed).
+movement across the two-dimensional seascape through both passive
+diffusion and active taxis in response to habitat gradients, in the
+manner of @thorson2021a (see @ovando2025). Empirical estimates of
+movement rates in the same units as those used in our simulation model
+were not readily available. As such, we fixed movement rates of recruits
+and post-recruit fish such that 95% of animals were within a given
+linear distance of their point of origin after one year of diffusion and
+taxis. We grouped these distances into low (2.5km), medium (25km), or
+high (250km) dispersal distances, and assigned these dispersal distances
+to the recruit and post-recruit life stages of each of our simulated
+species based on our best judgement and a desire to reflect a range of
+movement dynamics (e.g. sedentary adults and highly dispersed larvae,
+and *vice versa*) (@tbl-fixed).
 
 For each simulation we augmented these fixed parameters with random
 draws of variable parameters that describe other less-certain aspects of
@@ -641,14 +642,6 @@ all species have the same habitat distributions, an MPA placed on the
 core habitat of one species may be protecting marginal habitat of
 another.
 
-At the same time, fishing fleets are not passive sedentary filter
-feeders, they actively adapt their behavior and distribution in space
-and time to best achieve their objectives. The simulated effects of an
-MPA can be highly sensitive to whether we assume fishers adapt to the
-new regulations, for example by concentrating their fishing effort along
-the borders of a protected area. These bio-economic dynamics can have
-profound impacts on the simulated effects of MPAs [@ovando2025].
-
 Following methods described in @ovando2023a and @ovando2025, for each
 species within each simulation we randomly set a parameter $\kappa$ that
 describes the intrinsic heterogeneity of their habitat across the
@@ -660,13 +653,23 @@ given simulation. Using the methods described in @ovando2025 based on
 @thorson2017a, these $\kappa$ values for each species, along with the
 correlation matrix among all species, are used to construct a covariance
 matrix. which in turn is used to simulate habitat in space as a function
-of a multivariate normal distribution. This covariance matrix is used to
-generate random draws of species distributions from a multivariate
-normal distribution that can vary across simulations both in their
-heterogeneity and in their correlation across species, with for example
-some simulations resulting in *reef fish* and *groupers* having highly
-positively correlated habitats, and in others highly negatively
+of a multivariate normal distribution. We used this multivariate normal
+distribution to generate random draws of species distributions that can
+vary across simulations both in their heterogeneity and in their
+correlation across species, with for example some simulations resulting
+in *reef fish* and *groupers* having pathcy and highly positively
+correlated habitats, and in others smooth and highly negatively
 correlated habitats.
+
+Along with habitat heterogeneity, our model accounts for some of the
+complex behaviors of fishing fleets. Fishing fleets are clearly not
+passive sedentary filter feeders; they actively adapt their behavior and
+distribution in space and time to best achieve their objectives. The
+simulated effects of an MPA can be highly sensitive to whether we assume
+fishers adapt to the new regulations, for example by concentrating their
+fishing effort along the borders of a protected area. These bio-economic
+dynamics can have profound impacts on the simulated effects of MPAs
+[@ovando2025].
 
 Our model also allows for a range of spatio-temporal fleet dynamics. For
 any given fleet in a given simulation, total fishing effort across all
@@ -676,24 +679,26 @@ over time baring a policy implementation such as an MPA. Under *Open
 Access,* total fishing effort can expand or contract from year-to-year
 based on the profitability of the fishery in prior years, which under
 stable conditions will evolve to a bionomic equilibrium wherein total
-profits are zero [@costello2016; @cabral2019]. Given a total amount of
-fishing effort, fishing fleets distribute themselves in space based on
-profits or revenue in space, with the choice of which randomly set for
-each fleet in each simulation. When fleet dynamics are based on profits,
-fishing costs in a given patch can be a function of the distance of that
-patch from the home port of the fleet in question. Implementation of an
-MPA can either cause fishing effort to redistribute or leave the
-fishery. When MPAs cause displacement, all the effort that existed
-within the bounds of the MPA are displaced to patches outside the MPA in
-the time step following the MPA, based on the randomly selected spatial
-distribution strategy. When MPAs result in effort attrition, all the
-effort that existed inside the MPA prior to implementation leaves the
-fishery. Note that under *Open Access* conditions MPA total effort will
-evolve over time after the initial MPA displacement or attrition effects
-on effort. Collectively these dynamics allow the simulated fishing
-fleets to adjust both the total amounts of effort and the spatial
-distribution of that effort as a function of fishing opportunities and
-the effects of MPAs on those opportunities.
+profits are zero [@costello2016; @cabral2019].
+
+Given a total amount of fishing effort, simulated fishing fleets
+distribute themselves in space based on profits or revenue in space,
+with the choice of which randomly set for each fleet in each simulation.
+When fleet dynamics are based on profits, fishing costs in a given patch
+can be a function of the distance of that patch from the home port of
+the fleet in question. Implementation of an MPA can either cause fishing
+effort to redistribute or leave the fishery. When MPAs cause
+displacement, all the effort that existed within the bounds of the MPA
+is displaced to patches outside the MPA in the time step following the
+MPA, based on the randomly selected spatial distribution strategy. When
+MPAs result in effort attrition, all the effort that existed inside the
+MPA prior to implementation leaves the fishery. Note that under *Open
+Access* conditions MPA total effort will evolve over time after the
+initial MPA displacement or attrition effects on effort. Collectively
+these dynamics allow the simulated fishing fleets to adjust both the
+total amounts of effort and the spatial distribution of that effort as a
+function of fishing opportunities and the effects of MPAs on those
+opportunities.
 
 Fishing pressure is one of the most important variables in determining
 the potential effects of MPAs. All else being equal, an MPA will have a
@@ -709,7 +714,8 @@ mortality rates into a common currency, we report the baseline
 divided by the total biomass of the species under unfished conditions
 (*B0*); *B/B0*. The closer *B/B0* is to zero, the more heavily fished
 the species is. The closer *B/B0* is to 1, the less heavily fished. See
-@fig-deps for the distribution of baseline *B/B0* values
+@fig-deps for the distribution of baseline *B/B0* values across our
+simulations.
 
 The four species archetypes were used in three different bio-economic
 fishery systems that varied in their complexity. The *simple* scenario
@@ -798,15 +804,15 @@ for details of individual distributions form which variables are drawn
 
 ### Simulating MPA Effects
 
-We ran each simulated fishery through an MPA experiment where attributes
-of the simulated fishery were held at identical values, except for the
-application of an MPA. The size and location of MPAs are two of the core
-design attributes of any protected area that can play a substantial role
-in their effects; all else being equal, a large MPA in a heavily fished
-area will have a greater effect than a small MPA placed in a lightly
-fished area. To encompass this range, our MPA experiments were created
-from a factorial combination of MPA size (represented as the percent of
-the surface area of the seascape covered in a fully protected – i.e.,
+We ran each simulated fishery through an MPA experiment where all
+attributes of the simulated fishery were held at identical values,
+except for the application of an MPA. The size and location of MPAs are
+two of the core design attributes of any protected area that can play a
+substantial role in their effects; all else being equal, a large MPA in
+a heavily fished area will have a greater effect than a small MPA placed
+in a lightly fished area. Our MPA experiments were created from a
+factorial combination of MPA size (represented as the percent of the
+surface area of the seascape covered in a fully protected – i.e.,
 no-take – MPA) and the placement strategy of the MPA (*Avoid Fishing* or
 *Target Fishing*). MPA size ranged from
 `r percent(min(mpa_outcomes$numeric_prop_mpa))` to
@@ -868,20 +874,20 @@ unique MPA experiments.
 
 The prior steps of simulating a fishery system under a range of MPA
 experiments create a distribution of causal effects of MPAs on the
-measured effects. We compared these true effects with estimates from
+selected metrics. We compared these true effects with estimates from
 common empirical indicators of MPA performance. To isolate the
 fundamental performance of the indicator from questions around data
 quality and bias, all indicators were calculated using the simulated
 data without any observation error.
 
 We evaluated six empirical indicators commonly used to assess MPA
-performance; Biomass Density Before-After-Control-Impact ( BACI),
-Biomass Density Response Ratio, Mean Length Response Ratio, Effort
-Gradient, Biomass Density Gradient, Biomass Density Before-After
-Gradient (@tbl-indicators). These indicators vary in their underlying
+performance; *Biomass Density Before-After-Control-Impact* ( BACI),
+*Biomass Density Response Ratio*, *Mean Length Response Ratio*, *Effort
+Gradient*, *Biomass Density Gradient*, *Biomass Density Before-After
+Gradient* (@tbl-indicators). These indicators vary in their underlying
 response variable (biomass density, mean length, or fishing effort),
 their spatial design (*inside-outside* or *near- far*), and whether they
-include temporal comparisons (before-after vs. after-only). These
+include temporal comparisons (*before-after* vs. *after-only*). These
 indicators were selected to represent a range of approaches used in the
 empirical MPA literature to infer conservation and fisheries effects. A
 full description of each indicator and its stylized equation is provided
@@ -901,21 +907,22 @@ Ratio, Biomass BACI, Mean Length Response Ratio) require the selection
 of a comparable reference site outside the MPA. In empirical studies,
 reference sites are often selected to match the habitat and
 environmental characteristics within the MPA [@chapman1999;
-@claudet2010; @osenberg2011]; @smith2024b). We approximated this
-reference selection approach by controlling for unfished biomass per
-patch and weighting regressions by distance from the MPA border.
+@claudet2010; @osenberg2011; @smith2024b]. We approximated this
+reference site selection approach by controlling for unfished biomass
+per patch and weighting regressions by distance from the MPA border.
 Specifically, we calculated the linear distance of each patch from the
-nearest MPA border and weighted models such that the patches deepest
-inside the MPA are compared against those farthest outside the MPA.
+nearest MPA border and weighted models such that the the model pays the
+most attention to patches deepest inside the MPA and those farthest
+outside the MPA.
 
-Gradient indicators (e.g., Effort Gradient, Biomass Gradient, Biomass
-Before-After Gradient) compare metrics outside of MPAs based on distance
-from MPA borders. Following the general approach of @medoff2022 and
-@lynham2024, we calculated the linear distance from each patch from the
-MPA border, and assigned patches in the lowest 20th percentile of
-distance as *Near* and those in the top 80th percentile as *Far*. As
-with *inside-outside* style analyses, we also controlled for unfished
-biomass per species per patch.
+Gradient (*near-far*) indicators (e.g., Effort Gradient, Biomass
+Gradient, Biomass Before-After Gradient) compare metrics outside of MPAs
+based on distance from MPA borders. Following the general approach of
+@medoff2022 and @lynham2024, we calculated the linear distance from each
+patch from the MPA border, and assigned patches in the lowest 20th
+percentile of distance as *Near* and those in the top 80th percentile as
+*Far*. As with *inside-outside* style analyses, we also controlled for
+unfished biomass per species per patch.
 
 All models were fit using linear models in R [@rcoreteam2024]. For each
 indicator, variables were measured without error at the resolution of
@@ -937,7 +944,7 @@ fit the model were N = 882.
 | Biomass Density Before-After Gradient (*near-far*) | Ratio of change in *B* after MPA implementation near to MPA relative to far from MPA. Assumes Parallel trends in *B* density near and far from MPA pre- and post-implementation. | @lynham2024 | $\begin{array}{l} log(B_{p,t})\sim \beta_0 + \\ \beta_1NEAR_p + \beta_2AFTER_t + \\ \pmb{\beta_3}NEAR_p \times AFTER_t \end{array}$ |
 
 : General structure of tested indicators of MPA effects. Bolded $\beta$
-parameter in **Equation** column indicates parameter interpreted as the
+parameter in Equation column indicates parameter interpreted as the
 effect of the MPA. *B* refers to biomass, *E* refers to effort, *ML*
 refers to mean length. *INSIDE* refers to patches *p* located inside MPA
 borders (whether before or after MPA implementation), *OUTSIDE* to
@@ -954,7 +961,7 @@ MPA implementation. {#tbl-indicators}
 
 We do not report uncertainty of estimates, as our primary objective is
 to evaluate relative performance across indicators rather than to make
-statistical inferences. Given that this is a simulation-based analysis
+statistical inference. Given that this is a simulation-based analysis
 with arbitrarily defined sample sizes, conventional statistical
 significance testing is not meaningful [@white2014], so we do not
 evaluate indicators against statistical significance thresholds (e.g., p
@@ -980,17 +987,17 @@ a network of MPAs along the coast of California, USA, reported in
 individual MPAs, with separate ratios for the total biomass density of
 targeted and non-targeted fishes. In order to match these empirical
 response ratios, we sampled 2500 of our MPA experiments with replacement
-using a weighting scheme designed to produce distribution of biomass
-response ratios that matched those reported in @smith2024b (see
+using a weighting scheme designed to produce a distribution of *Biomass
+Density Response Ratios* that matched those reported in @smith2024b (see
 @fig-tuned-rrs ). We restricted the candidate simulations for this
 process to MPA sizes between 10% and 40%, and to multi-species levels of
 complexity, to more closely reflect plausible scenarios for the
 California system. This allowed us to examine what range simulated MPA
-effects could be associated with the distribution of response ratios
-measured in the California MPAs studied in @smith2024b. Note that we do
-not claim these as being simulations of the California MPA system
-itself, but rather a set of simulations constrained to match a
-distribution of *Biomass Density Response Ratios* seen in a real-world
+effects could be associated with the distribution of *Biomass Density
+Response Ratios* measured in the California MPAs studied in @smith2024b.
+Note that we do not claim these as being simulations of the California
+MPA system itself, but rather a set of simulations constrained to match
+a distribution of *Biomass Density Response Ratios* seen in a real-world
 system.
 
 ### Comparing MPA Effects and Indicators
@@ -1074,9 +1081,9 @@ placement_effect <- total_mpa_outcomes |>
 
 Our simulated fisheries varied in their behavior as a function of the
 fixed (@tbl-fixed) and variable (@tbl-variable) simulation parameters.
-The degree of resulting fishing pressure is one of the most important
-determinants of MPA effects. The median depletion ($B/B_0$) value across
-all our included simulations was
+The degree of resulting fishing pressure, and subsequent depletion, is
+one of the most important determinants of MPA effects. The median
+depletion ($B/B_0$) value across all our included simulations was
 `r round(median(state_depletions$depletion),2)`, mean value
 `r round(mean(state_depletions$depletion),2)`, ranging from a minimum of
 `r round(min(state_depletions$depletion),2)`and a maximum of
@@ -1105,12 +1112,12 @@ losses in biomass increased with the level of fishing pressure
 
 MPAs resulted in a net increase in species- and fleet-level *Catch* in
 `r better_catch` of simulations, and a net decrease in *Catch* in
-`r worse_catch` of simulations. Smaller effect sizes (absolute effect
-sizes less than 25%) were much more common than larger effect sizes.
-Using the *Avoid Fishing* MPA strategy resulted in slightly lower
-frequency of net catch losses than the *Target Fishing* strategy, but
-only slightly less so. While negative catch effects still occurred
-across all simulated levels of fishing pressure, the number of
+`r worse_catch` of simulations. Smaller effect sizes on *Catch*
+(absolute effect sizes less than 25%) were much more common than larger
+effect sizes. Using the *Avoid Fishing* MPA strategy resulted in
+slightly lower frequency of net catch losses than the *Target Fishing*
+strategy, but only slightly less so. While negative catch effects still
+occurred across all simulated levels of fishing pressure, the number of
 simulations with positive catch effects increased with the
 counterfactual degree of fishing pressure (@fig-outcomes).
 
@@ -1118,7 +1125,7 @@ counterfactual degree of fishing pressure (@fig-outcomes).
 
 ```{r}
 #| label: fig-outcomes
-#| fig-cap: 'Distribution of simulation results across MPA effects (panels), proportion of seascape in MPA (columns), and level of baseline depletion in the absence of MPAs (colors, biomass *B* divided by unfished biomasss *B0*). Y-axis shows the "MPA effect", the percent change in the outcome in question caused by the MPA. *Biomass Inside* refers to total individual species biomass inside MPA borders. *Biomass Outside* refers to total individual species biomass outside MPA borders. *Total Biomass* refers to total individual species biomass both inside and outside MPA borders. *Catch* refers to catch per species and fleet outside the MPA.'
+#| fig-cap: 'Distribution of simulation results across MPA effects (panels), proportion of seascape in MPA (columns), and level of baseline depletion in the absence of MPAs (colors, biomass *B* divided by unfished biomasss *B0*). Y-axis shows the "MPA effect", the percent change in the outcome in question caused by the MPA. *Biomass Inside* refers to total individual species biomass inside MPA borders. *Biomass Outside* refers to total individual species biomass outside MPA borders. *Total Biomass* refers to total individual species biomass both inside and outside MPA borders. *Catch* refers to total catch per species and fleet outside the MPA.'
 #| fig-height: 6
 
 outcome_labeller <- c(
@@ -1257,8 +1264,8 @@ simulations with relatively higher biomass density response ratios were
 associated with simulations with relatively lower *Biomass Outside*
 effects.
 
-*Gradient* indicators exploting *near-far* patterns around MPAs had much
-lower Spearman's $\rho$ values across all effects (all
+*Gradient* indicators exploiting *near-far* patterns around MPAs had
+much lower Spearman's $\rho$ values across all effects (all
 $|\rho| \leq 0.2$), explaining almost none of the rank-level variation
 in any of the evaluated MPA effects. Among the *near-far* indicators,
 *Effort Gradients* had the highest correlation values, ($\rho$ =
@@ -1272,18 +1279,16 @@ negative. *Biomass Density BACI* had the clearest negative correlation
 with MPA effects on catch, with $\rho = -0.14$ (@fig-rho-error-bias).
 
 The $\rho$ values shown in @fig-rho-error-bias indicate correlation
-between the indicator value and the outcome value – how well a
-relatively high or low indicator value corresponds to a relatively high
-or low effect value. These correlations tell us how reliably an
-indicator can be used to rank different MPAs in terms of performance
-related to a specific MPA effect. We also examined how well raw
-indicator values represented raw MPA effects by calculating measures of
-error (root mean squared error) and bias (mean absolute error), where
-positive bias values indicate that, on average, indicator values were
-higher than true values, and *vice versa*. These metrics are more useful
-for determining how well the value of a given indicator at one MPA
-translates into the value of a given effects at the same MPA. The
-average RMSE across all indicators was
+between the indicator value and the outcome value. These correlations
+tell us how reliably an indicator can be used to rank different MPAs in
+terms of performance related to a specific MPA effect. We also examined
+how well raw indicator values represented raw MPA effects by calculating
+measures of error (root mean squared error) and bias (mean absolute
+error), where positive bias values indicate that, on average, indicator
+values were higher than true values, and *vice versa*. These metrics are
+more useful for determining how well the value of a given indicator at
+one MPA translates into the value of a given effects at the same MPA.
+The average RMSE across all indicators was
 `r round(mean(100 * mape_meep_rho$error))` percentage points, with an
 average bias across all indicators of
 `r round(mean(100 * mape_meep_rho$bias))` percentage points. Most
@@ -1293,10 +1298,10 @@ though some indicators were negatively biased for *Biomass Inside* and
 
 All of the results shown in @fig-rho-error-bias are based comparisons at
 the level of individual species and where applicable fleets, for example
-comparing the Biomass Density BACI value for reef fish to the true
+comparing the *Biomass Density BACI* value for reef fish to the true
 effect of the MPA on reef fish catches by an individual fleet. We also
-ran our results on total values, comparing for example the Biomass
-Density BACI value aggregated across all simulated species to the true
+ran our results on total values, comparing for example the *Biomass
+Density BACI* value aggregated across all simulated species to the true
 effect of the MPA on all catches across all fleets
 (@fig-rho-error-bias-total). Doing so had no substantial impact on the
 core results presented in the body of the paper.
@@ -1422,7 +1427,7 @@ catch at all (@fig-rr-performance).
 
 ```{r}
 #| label: fig-rr-performance
-#| fig-cap: "Simulated Biomass Density Response Ratios (x-axis) plotted against simulated MPA effects (y-axis), with distribution of response ratios matched to empirical response ratios of targeted finfish reported by @smith2024b. Constrained to MPA sizes besteen 10-40% of seascape and the 'medium' difficulty"
+#| fig-cap: "Simulated Biomass Density Response Ratios (x-axis) plotted against simulated MPA effects (y-axis), with distribution of response ratios matched to empirical response ratios of targeted finfish reported by @smith2024b. Constrained to MPA sizes besteen 10-40% of seascape and the scenarios with multiple co-existing species."
 #| fig-height: 6
 
 rr_performance <- comparison |>
@@ -1554,7 +1559,7 @@ highly variable, reinforcing the need for monitoring and evaluating MPAs
 rather than assuming their effects *a priori*. Our results also revealed
 that indicators varied substantially in their ability to act as proxies
 of different MPA effects. While *inside-outside* indicators (e.g.,
-Response Ratios, Biomass Density BACI) tracked the effects of MPAs
+*Response Ratios*, *Biomass Density BACI*) tracked the effects of MPAs
 inside their borders relatively well, *near-far* indicators generally
 were poor proxies of MPA effects. All evaluated indicators were
 negatively correlated with the catch effects of MPAs, though this
@@ -1564,20 +1569,20 @@ for assessing MPA effects.
 
 ### Variability of MPA Effects
 
-Our simulated MPAs almost always increased biomass inside their borders
-(`r better_inside` of simulations), though the magnitude of these gains
-varied depending on variables such as MPA size, placement, and fishing
-pressure. This variability is consistent with past studies that show MPA
-design and context strongly shape corresponding MPA effects [@white2011;
-@hilborn2004a], and confirms the common-sense expectation that closing
-an area to fishing generally leads to increased biomass in that area.
-However, we also found that biomass outside the MPA declined in
-`r worse_outside` of our simulations, indicating that spillover from
-inside MPAs was often insufficient to overcome the effects of
-concentrated fishing effort outside. Overall, increases in biomass
-inside MPAs were typically large enough that total biomass (inside and
-outside) still increased in `r better_total` of simulations, despite
-potential reductions in *Biomass Outside*.
+Our simulated MPAs almost always increased *Biomass Inside* their
+borders (`r better_inside` of simulations), though the magnitude of
+these gains varied depending on variables such as MPA size, placement,
+and fishing pressure. This variability is consistent with past studies
+that show MPA design and context strongly shape corresponding MPA
+effects [@white2011; @hilborn2004a], and confirms the common-sense
+expectation that closing an area to fishing generally leads to increased
+biomass in that area. However, we also found that *Biomass Outside* the
+MPA declined in `r worse_outside` of our simulations, indicating that
+spillover from inside MPAs was often insufficient to overcome the
+effects of concentrated fishing effort outside. Overall, increases in
+biomass inside MPAs were typically large enough that *Total Biomass*
+(inside and outside) still increased in `r better_total` of simulations,
+despite potential reductions in *Biomass Outside*.
 
 Our result that MPAs can reduce total biomass is perhaps unintuitive. In
 our simulations, when an MPA displaces fishing effort from low-biomass
@@ -1585,21 +1590,21 @@ areas to high-biomass areas (e.g. when MPAs were placed using the "avoid
 fishing" strategy), net fishing mortality on the population can
 increase, despite the protection afforded by the MPA. Or, consider a
 scenario where an MPA is placed on the core habitat of one species, but
-in doing do displaces fishing effort onto the core habitat of another
+in doing so displaces fishing effort onto the core habitat of another
 species. While these negative effects on total biomass were relatively
-rare (`r worse_total` of simulations) and MPAs often increased biomass
-substantially, these findings highlight the potential for unintended
-consequences of MPAs, particularly when fished species and fishing
-fleets have heterogeneous distributions and behaviors [see @abbott2012
-and @pons2022a]. Documenting the mechanisms for these unintended
-conservation consequences as we have done here can help practitioners be
-aware of this possibility so that they can consider whether there is a
-risk in the planning stage and better understand empirical results
-showing negative conservation effects of MPAs should they arise.
+rare (`r worse_total` of simulations), these findings highlight the
+potential for unintended consequences of MPAs, particularly when fished
+species and fishing fleets have heterogeneous distributions and
+behaviors [see @abbott2012 and @pons2022a]. Documenting the mechanisms
+for these unintended conservation consequences as we have done here can
+help practitioners be aware of this possibility so that they can
+consider whether there is a risk in the planning stage and better
+understand empirical results showing negative conservation effects of
+MPAs should they arise.
 
-While MPAs caused a net increase in total biomass in `r better_total` of
-simulations, and a net increase in biomass outside the MPA in
-`r better_outside` of simulations, MPAs reduced catches in
+While MPAs caused a net increase in *Total Biomass* in `r better_total`
+of simulations, and a net increase in *Biomass Outside* the MPA in
+`r better_outside` of simulations, MPAs reduced *Catch* in
 `r worse_catch` of simulations. This shows that in the majority of our
 simulations, MPAs caused a trade-off of better conservation but lower
 catches. This trade-off is not due to a lack of spillover effects in our
@@ -1608,17 +1613,17 @@ spillover from the MPA was not sufficient to make up for the loss in
 fishing grounds caused by the protected area.
 
 However, our results also confirm that MPAs are indeed capable of
-producing win-win outcomes where biomass and catch both increase
-(`r better_both` of simulations) more commonly when the fish population
-in question would have been highly depleted in the absence of an MPA (
-`r better_both_depleted` of simulations where B/B0 $\leq$ 0.25), and the
-MPA size was not too large relative to the movement dynamics of the
-fished species (or too small to have a meaningful effect)
-(@fig-quadrant-freq). Under these win-win conditions, the spillover
-benefits of the MPA rebuilding an overfished population were sufficient
-to overcome to loss in fishing grounds.
+producing win-win outcomes where biomass and catch both increase thanks
+to the protected area (`r better_both` of simulations) more commonly
+when the fish population in question would have been highly depleted in
+the absence of an MPA ( `r better_both_depleted` of simulations where
+B/B0 $\leq$ 0.25), and the MPA size was not too large relative to the
+movement dynamics of the fished species (or too small to have a
+meaningful effect) (@fig-quadrant-freq). Under these win-win conditions,
+the spillover benefits of the MPA rebuilding an overfished population
+were sufficient to overcome to loss in fishing grounds.
 
-Further tesearch explaining the variation in effect sizes and trade-offs
+Further research explaining the variation in effect sizes and trade-offs
 between conservation and catch effects of MPAs is needed. Fishing
 pressure and MPA size are conceptually two of the clearest drivers of
 MPA effects, and our results confirm this to a degree. Across our
@@ -1630,7 +1635,7 @@ also found substantial variation around these broad effects; large MPAs
 sometimes had negative conservation outcomes on heavily fished species,
 and similarly even for heavily fished species MPAs on the order of 30%
 of the seascape produced anything from a 100% loss in catch to an over
-200% gain (@fig-outcomes) , depending on the host of other bio-economic
+200% gain (@fig-outcomes) , depending on the other bio-economic
 variables explored in @tbl-fixed and @tbl-variable. Collectively, our
 results highlight that the effects of MPAs on conservation and catches
 are a complex function of many interacting bio-economic variables
@@ -1650,7 +1655,7 @@ the conservation effects of MPAs given likely violations to the core
 assumptions of these indicators such as uncontrolled for differences in
 baseline habitat inside versus outside, recruitment shocks, and fishing
 fleet responses [@ferraro2018; @larsen2019; @hilborn2022b; @ovando2021;
-@hopf2024]. Our results show that even when faced when these biasing
+@hopf2024]. Our results show that even when faced with these biasing
 factors, *inside-outside* indicators still could be relatively reliable
 proxies for the relative conservation performance of different MPAs, as
 evidenced by the relatively high Spearman's $\rho$ values
@@ -1707,17 +1712,19 @@ These *near-far* approaches are appealing in part because they can be
 calculated using only post-MPA fishery-dependent data, and do not
 necessarily require establishing monitoring programs to track conditions
 pre-implementation or survey within MPAs. While gradient methods were
-effective indicators of any of the MPA effects evaluated in this study,
-research is needed on whether there are modifications to these designs
-that are effective for some use cases, given that fishery-dependent
-*near-far* data are often all that are available and as such are likely
-to be used despite any associated warnings from works such as this. For
-example, perhaps conditional on the life history of the species
-gradients at specific distances are more meaningful than others. There
-are also many other potential objectives of MPAs besides those evaluated
-here, which may perhaps be reliably tracked by gradient-based methods.
-For example, increases in the size and abundance of fish near MPA
-borders may be of high value to recreational fishers
+not effective indicators of any of the MPA effects evaluated in this
+study, research is needed on whether there are modifications to these
+designs that are effective for some use cases, given that
+fishery-dependent *near-far* data are often all that are available and
+as such are likely to be used despite any associated warnings from works
+such as this. For example, perhaps conditional on the life history of
+the species gradients at specific distances are more meaningful than
+others.
+
+There are also many other potential objectives of MPAs besides those
+evaluated here, which may perhaps be reliably tracked by gradient-based
+methods. For example, increases in the size and abundance of fish near
+MPA borders may be of high value to recreational fishers
 [@franceschini2024], even if those increases on the border do not
 necessarily equate to commensurate benefits at the scale of the total
 population or fishery. Research should also explore whether ensembles of
@@ -1792,7 +1799,7 @@ here.
 
 ### Caveats
 
-Our results depend on the assumptions embedded in the marlin operating
+Our results depend on the assumptions embedded in the `marlin` operating
 model used here [@ovando2023a], which incorporates many common
 assumptions around population dynamics, movement, and fleet dynamics.
 While alternate assumptions could be used, the core of our results are a
@@ -1808,14 +1815,18 @@ indicator performances may be more typical in reality than others.
 The model also omits certain ecological processes, such as trophic
 interactions or temporal trends in habitat or life history, which could
 yield different patterns and also further complicate empirical
-evaluations of MPA effects. Future work could test performance under a
-system-specific dynamics and with more explicit ecological linkages. We
-only assess a subset of possible MPA effects and their interactions.
-Other harder to model effects could have important implications. For
-example, in scenarios where MPAs decrease catch, the economic condition
-and food security of a community could still go up in total if those
-decreases in catch were offset by the economic benefits of tourism
-opportunities caused by the MPA [@ban2019].
+evaluations of MPA effects. These temporal trends are likely to become
+increasingly important to account for given the effects of climate
+change on global oceans [@fredston-hermann2020].
+
+Future work could test performance under system-specific dynamics and
+with more explicit ecological linkages. We only assess a subset of
+possible MPA effects and their interactions. Other harder to model
+effects could have important implications. For example, in scenarios
+where MPAs decrease catch, the economic condition and food security of a
+community could still go up in total if those decreases in catch were
+offset by the economic benefits of tourism opportunities caused by an
+MPA [@ban2019].
 
 In order to calculate our empirical indicators, we assumed that all data
 are observed without error. This choice isolates indicator performance,
