@@ -9,7 +9,7 @@ purrr::walk(foos, ~ source(here::here("R", .x)))
 
 prep_run(
   n_states = 92,
-  run_name = "indicators_v1.0",
+  run_name = "indicators_v1.01",
   drop_patches = FALSE,
   experiment_workers = 8,
   rx = 21,
