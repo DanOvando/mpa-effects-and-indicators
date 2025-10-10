@@ -64,20 +64,6 @@ difficulty_species <- list(
 )
 
 
-# critter_templates <- map(unique(list_c(difficulty_species)),
-#                          ~ marlin::create_critter(scientific_name = .x, seasons = seasons)) |>
-#   set_names(unique(list_c(difficulty_species)))
-
-
-
-# if ("epo" %in% difficulties){
-#   
-#   sdmsish <- read_rds(here("data","epo_sdmsish.rds"))
-#   
-#   popsizeish <- read_rds(here("data","epo_popsizeish.rds"))
-#   
-# }
-
 baseline_state_experiments <-
   tibble(
     kiss = sample(c(FALSE, TRUE), n_states, replace = TRUE),
