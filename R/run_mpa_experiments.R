@@ -23,9 +23,6 @@ run_mpa_experiment <-
            mpa_offset = 2) {
     options(dplyr.summarise.inform = FALSE)
     
-    # library(rsample)
-    # 
-    # library(workflowsets)
     
     Rcpp::sourceCpp(here("src", "select_contiguous_mpa.cpp"))
     

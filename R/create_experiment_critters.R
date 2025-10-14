@@ -198,7 +198,6 @@ create_experiment_critters <-
       
       
       
-      # library(FishLife)
       # 
       # edge_names = c( FishLife::FishBase_and_Morphometrics$tree$tip.label,
       #                 FishLife::FishBase_and_Morphometrics$tree$node.label[-1] ) # Removing root

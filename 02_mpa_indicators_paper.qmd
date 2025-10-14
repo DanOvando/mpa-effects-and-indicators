@@ -1,5 +1,5 @@
 ---
-title: "Evaluating the reliability of common indicators for assessing marine protected area effects on conservation and catches"
+title: "Evaluating common indicators for assessing marine protected area effects on conservation and catches"
 author:
   - name: Daniel Ovando
     affiliation:
@@ -65,8 +65,6 @@ knitr:
 foos <- list.files(here::here("R"))
 
 purrr::walk(foos, ~ source(here::here("R", .x)))
-
-library(gt)
 
 library(corrr)
 
@@ -428,8 +426,8 @@ total_mpa_outcomes <- total_inds_and_outs |>
 
 ## Title Page
 
-Manuscript title: Evaluating the reliability of common indicators for
-assessing marine protected area effects on conservation and catches
+Manuscript title: Evaluating common indicators for assessing marine
+protected area effects on conservation and catches
 
 Short Title: Evaluating common indicators of MPA effects
 
@@ -451,11 +449,12 @@ Open Research statement: No data were collected for this study. This
 submission uses novel code, which is provided, per our requirements, in
 an external repository to be evaluated during the peer review process.
 The link to this external repository is
-<https://github.com/DanOvando/mpa-indicators-and-emulators.> A pre-print
+<https://github.com/DanOvando/mpa-effects-and-indicators>. A pre-print
 archive of the code along with all results needed to reproduce this
-paper is also available at <https://zenodo.org/uploads/17308921>. This
-zenodo repository will be upgraded to a permanent archive of the final
-results and paper upon publication.
+paper is also available at Zenodo
+<https://doi.org/10.5281/zenodo.17308920> . This Zenodo repository will
+be upgraded to a permanent archive of the final results and paper upon
+publication.
 
 Key Words: Marine Protected Areas, Conservation effectiveness,
 Bio-economic modeling, Protected area evaluation, Fisheries management
@@ -742,7 +741,7 @@ simulated fishery for 75 years, to achieve equilibrium conditions
 baseline pre-MPA implementation.
 
 | Variable | Description | Reef Fish | Grouper | Shark | Tuna |
-|------------|------------|------------|------------|------------|------------|
+|----|----|----|----|----|----|
 | *m* | Asmptotic natural mortality | 0.4 | 0.16 | 0.21 | 0.3 |
 | *c* | Rate of Lorenzen length-inverse mortality function | -1 | -.57 | -1 | -1 |
 | $l_\infty$ | Asymptotic length | 104 | 222 | 216.4 | N/A |
@@ -771,7 +770,7 @@ Information for visualizations of life history functions resulting from
 these parameters. {#tbl-fixed}
 
 | Name | Description | Variable Category |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Fishing Mortality Rate | Ratio of instantaneous fishing mortality rate relative to natural mortality. The higher this is, the lower $B_{bau}/B_0$ will be. | Fishing Fleet |
 | Fishing effort response to MPA | Dictates whether effort that used to fish inside MPAs "stays" and is redistributed in non-MPA patches or "leaves" the fishery | Fishing Fleet |
 | Spatial catchability | Whether catchability of the fishing fleets varies in space | Fishing Fleet |
@@ -933,7 +932,7 @@ after, (e.g. *Biomass Density BACI*), the number of data points used to
 fit the model were N = 882.
 
 | **Indicator** | **Estimated Effect and Key Assumptions** | **Example Use** | **Equation** |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | Biomass Density Before-After -Control-Impact (*inside-outside*) | Ratio of change in *B* after MPA implementation inside MPA relative to outside MPA. Assumes Parallel trends in *B* inside and outside MPA pre- and post-implementation. | @hopf2024 | $\begin{array}{l} log(B_{p,t})\sim\beta_0 + \\ \beta_1INSIDE_p + \beta_2AFTER_t \\ +\pmb{\beta_3}INSIDE_p \times AFTER_t \end{array}$ |
 | Biomass Density Response Ratio (*inside-outside*) | Post-MPA Ratio of *B* inside MPA relative to outside MPA. Assumes no pre-existing differences in *B* between inside and outside sites | @smith2024b | $log(B_p) \sim \beta_0 + \pmb{\beta_1}INSIDE_p$ |
 | Mean Length Response Ratio (*inside-outside*) | Post-MPA ratio of *ML* inside MPA relative to outside MPA. Assumes no pre-existing differences in *ML* between inside and outside patches. | @halpern2003 | $log(ML_p) \sim \beta_0 + \pmb{\beta_1}INSIDE_p$ |
@@ -1029,8 +1028,8 @@ not that the error was within 20% of the true outcome.
 
 All code needed to fully reproduce the results and manuscript are
 publicly available at
-[https://github.com/DanOvando/mpa-indicators-and-emulators](https://github.com/DanOvando/mpa-indicators-and-emulators.){.uri}
-(this will be migrated to a permanent Zenodo archive upon publication).
+<https://github.com/DanOvando/mpa-effects-and-indicators>
+https://doi.org/10.5281/zenodo.17308920.
 
 ## Results
 
@@ -1832,16 +1831,20 @@ but means that our results likely represent optimistic estimates.
 Observation error and sample sizes will further affect how well
 indicators track MPA effects. We also do not account for the possibility
 and effects of exogenous economic shocks that might impact fishing
-activity. We assumed that MPAs are fully no-take and were perfectly
-enforced; violations of either of these assumptions would further
-complicate studies of MPA effects [@claudet2010]. Future work could
-consider the specific magnitude of error and bias in estimated MPA
-effects resulting from different kinds and magnitude of observation
-error. It is beyond the scope of this study to review best practices in
-causal inference in spatial social-ecological systems, see @ferraro2018,
-@mcelreath2020, @zuur2009, @byrnes2025, @punt2019, @thorson2024b,
-@tredennick2021a, @grace2024, @white2011, @hopf2024, @hilborn2022b, and
-@ovando2021 for useful insights in this space.
+activity. All simulated data were collected after 20 years of MPA
+protection. MPA indicators and effects both evolve over time [@hopf2024;
+@ovando2016] and so future studies could further examine the ways in
+which different time periods of sampling affect results. We assumed that
+MPAs are fully no-take and were perfectly enforced; violations of either
+of these assumptions would further complicate studies of MPA effects
+[@claudet2010]. Future work could consider the specific magnitude of
+error and bias in estimated MPA effects resulting from different kinds
+and magnitude of observation error. It is beyond the scope of this study
+to review best practices in causal inference in spatial
+social-ecological systems, see @ferraro2018, @mcelreath2020, @zuur2009,
+@byrnes2025, @punt2019, @thorson2024b, @tredennick2021a, @grace2024,
+@white2011, @hopf2024, @hilborn2022b, and @ovando2021 for useful
+insights in this space.
 
 ## Conclusions
 
@@ -1899,11 +1902,11 @@ Open Research statement: No data were collected for this study. This
 submission uses novel code, which is provided, per our requirements, in
 an external repository to be evaluated during the peer review process.
 The link to this external repository is
-<https://github.com/DanOvando/mpa-indicators-and-emulators.> A pre-print
+<https://github.com/DanOvando/mpa-effects-and-indicators> A pre-print
 archive of the code along with all results needed to reproduce this
-paper is also available at <https://zenodo.org/uploads/17308921>. This
-zenodo repository will be upgraded to a permanent archive of the final
-results and paper upon publication.
+paper is also available at <https://doi.org/10.5281/zenodo.17308920>.
+This zenodo repository will be upgraded to a permanent archive of the
+final results and paper upon publication.
 
 \clearpage
 
@@ -1959,7 +1962,7 @@ equitable outcomes for nature and people.
 
 \newpage
 
-# Supporting Information: Evaluating the Reliability of Common Indicators for Assessing Marine Protected Area Contributions to Conservation and Food Security: Supporting Information
+# Supporting Information: Evaluating Common Indicators for Assessing Marine Protected Area Contributions to Conservation and Food Security: Supporting Information
 
 ::: {=latex}
 \renewcommand{\thefigure}{S\arabic{figure}}
@@ -1967,9 +1970,8 @@ equitable outcomes for nature and people.
 :::
 
 This document contains supporting figures and descriptions for the
-manuscript "Evaluating the Reliability of Common Indicators for
-Assessing Marine Protected Areas’ Contributions to Conservation and Food
-Security".
+manuscript "Evaluating Common Indicators for Assessing Marine Protected
+Areas’ Contributions to Conservation and Food Security".
 
 ### Case Study
 
