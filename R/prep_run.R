@@ -15,8 +15,6 @@ prep_run <- function(run_name = "test",
   
   library(tidyverse)
   
-  library(ggExtra)
-  
   library(marlin)
   
   library(here)
