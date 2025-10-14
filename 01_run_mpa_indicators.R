@@ -2,39 +2,38 @@
 
 # setup -------------------------------------------------------------------
 
+# load custom functions
 foos <- list.files(here::here("R"))
 
 purrr::walk(foos, ~ source(here::here("R", .x)))
 
 
+# loads functions and sets up some parameters for the model ---------------
+
 prep_run(
-  n_states = 92,
-  run_name = "indicators_v1.01",
-  drop_patches = FALSE,
-  experiment_workers = 8,
-  rx = 21,
-  ry = 21,
-  patch_area = 5^2
+  n_states = 92, # the number of simulated bio-economic states per difficulty level
+  run_name = "v1.0", # the name of the results batch
+  drop_patches = FALSE, # leave FALSE
+  experiment_workers = parallel::detectCores() - 2, # the number of cores to use
+  rx = 21, # the number of patches in the X dimension (number of columns)
+  ry = 21, # the number of patches in the Y dimension (number of rows)
+  patch_area = 5^2 # the area in km^2 of each patch
 ) # loads packages and creates and returns some global variables for the analysis
 
 Rcpp::sourceCpp(here("src", "select_contiguous_mpa.cpp"))
 
-save_experiments <- FALSE
+save_experiments <- FALSE # leave FALSE
 
+project <- "indicators" # leave as "indicators"
 
-library(tictoc)
+resolution <- c(rx, ry) # the resolution of the system
 
-project <- "indicators"
+mpa_years <- 20 # the number of years the MPA is simulated for
 
-resolution <- c(rx, ry)
+difficulties <- c("complex", "medium", "simple") # the range of difficulties to simulate
 
-mpa_years <- 20
-
-# difficulties <- c("simple")
-# difficulties <- c("simple", "medium", "complex")
-
-difficulties <- c("complex", "medium", "simple")
-
+# the list of species per difficulty scenario. Under simple, each species is treated as being
+# alone in an aquarium, rather than part of a shared seascape
 difficulty_species <- list(
   simple = c(
     "reef_fish",
@@ -53,17 +52,15 @@ difficulty_species <- list(
     "shark",
     "tuna",
     "grouper"
-  ),
-  epo = c("thunnus albacares",
-          "katsuwonus pelamis",
-          "thunnus obesus",
-          "carcharhinus falciformis",
-          "isurus oxyrinchus",
-          "sphyrna zygaena",
-          "carcharhinus longimanus")
+  )
 )
 
+# unfished biomass sizes per fish species
+b0s <- tibble(critter = c("reef_fish", "shark", "tuna", "grouper"), b0 = c(4e6,1e6,6e6,3e6))
 
+# This section creates the bio-economic parameters for each state
+
+# generates draws of parameters that apply across all species in a draw
 baseline_state_experiments <-
   tibble(
     kiss = sample(c(FALSE, TRUE), n_states, replace = TRUE),
@@ -82,21 +79,23 @@ baseline_state_experiments <-
   ungroup() |> 
   mutate(state_id = 1:n())
 
+# samples port locations
 port_locations <-
   tibble(x = c(1, resolution[1]), y = c(1, resolution[2])) # coordinates to test impact of highly disparate ports
 
 future::plan(future::multisession, workers = experiment_workers)
 
 
+# loop over difficulties. The somewhat convoluted looping here is to make things more memory 
+# efficient
 for (difficulty in difficulties) {
-  tic()
   set.seed(42)
   critters <-
     tibble(scientific_name = difficulty_species[[difficulty]])
 
-  message("creating habitats")
+  message(paste0("creating habitats for difficulty ",difficulty))
 
-  state_experiments <- baseline_state_experiments %>%
+  state_experiments <- baseline_state_experiments |> 
     mutate(
       habitats = future_pmap(
         list(kp = habitat_patchiness, max_abs_cor = max_abs_cor),
@@ -107,14 +106,14 @@ for (difficulty in difficulties) {
         .progress = TRUE,
         .options = furrr_options(seed = TRUE)
       )
-    ) %>%
+    )  |> 
     mutate(critter_correlations = map(habitats, ~ process_correlations(.x$critter_correlations))) |>
     unnest(cols = critter_correlations) |>
     mutate(habitats = map(
       habitats,
       ~ .x$critter_distributions  |> select(-patch) |> group_by(critter) |> nest(.key = "habitat")
     )) |>
-    unnest(cols = habitats) %>%
+    unnest(cols = habitats)  |> 
     ungroup() |>
     mutate(
       seasonal_movement = sample(c(FALSE, TRUE), length(state_id), replace = TRUE),
@@ -135,7 +134,7 @@ for (difficulty in difficulties) {
         length(state_id),
         replace = TRUE
       )
-    ) %>%
+    )  |> 
     mutate(
       spawning_season = if_else(spawning_aggregation, NA, NA),
       ontogenetic_shift = sample(c(TRUE, FALSE), length(state_id), replace = TRUE)
@@ -143,16 +142,14 @@ for (difficulty in difficulties) {
     mutate(ontogenetic_shift = ifelse(kiss, FALSE, ontogenetic_shift)) |>
     mutate(density_dependence = ifelse(ontogenetic_shift, "local_habitat", density_dependence))
  
-  b0s <- tibble(critter = c("reef_fish", "shark", "tuna", "grouper"), b0 = c(4e6,1e6,6e6,3e6))
-  
   state_experiments <- state_experiments |> 
     left_join(b0s, by = "critter")
 
-  message("finished habitats")
+  message(paste0("finished habitats for difficulty ",difficulty))
   
-  message("creating critters")
-
-  state_experiments <- state_experiments %>%
+  message(paste0("creating critters for difficulty ",difficulty))
+  
+  state_experiments <- state_experiments  |> 
       rename(scientific_name = critter) |>
       mutate(
         critter = future_pmap(
@@ -181,8 +178,8 @@ for (difficulty in difficulties) {
         )
       )
 
-  message("finished critters")
-
+  message(paste0("finished critters for difficulty ",difficulty))
+  
   
   # function to randomize selectivity parameters
   selfoo <- function(x,i){
@@ -204,13 +201,11 @@ for (difficulty in difficulties) {
   # if difficulty is simple, run each species as an independent simulation rather than collectively
   if (difficulty == "simple") {
     
-    # state_experiments$state_id <- paste0("simple_", 1:nrow(state_experiments))
-    
     state_experiments$state_id <- 1:nrow(state_experiments)
     
     
   }
-  
+   # aggregate things into fauna objects
   state_experiments <- state_experiments |> 
     group_by(state_id) |> 
     nest()  |> 
@@ -223,6 +218,7 @@ for (difficulty in difficulties) {
     ) |> 
     ungroup()
 
+  # aggregate things into fleet objects
   state_experiments <- state_experiments  |> 
     mutate(
       fleet = pmap(
@@ -252,15 +248,13 @@ for (difficulty in difficulties) {
     
  
 
-  # add in starting conditions
+  # create consistent in starting conditions so that they don't have to be re-run every MPA simulation
   init_condit <- function(fauna, fleets, rec_dev_cov_and_cor, years = 75) {
     starting_trajectory <-
       simmar(fauna = fauna,
              fleets = fleets,
              years = years,
              cor_rec = rec_dev_cov_and_cor$cor)
-    
-    # plot_marlin(check)
     
     starting_conditions <-
       starting_trajectory[(length(starting_trajectory) - seasons + 1):length(starting_trajectory)]
@@ -275,7 +269,8 @@ for (difficulty in difficulties) {
   }
   
   message(glue::glue("simulating initial {difficulty} conditions"))
-  state_experiments <- state_experiments %>%
+  
+  state_experiments <- state_experiments  |> 
     mutate(tmp = future_pmap(
       list(fauna = fauna,
       fleet = fleet,
@@ -292,7 +287,7 @@ for (difficulty in difficulties) {
   state_experiments$proc_starting_conditions <-
     map(state_experiments$tmp, "proc_starting_conditions")
   
-  state_experiments <- state_experiments %>%
+  state_experiments <- state_experiments  |> 
     select(-tmp)
   
   state_depletions <-
@@ -309,7 +304,7 @@ for (difficulty in difficulties) {
     left_join(state_depletions |> group_by(state_id) |> nest(.key = "depletion"),
               by = "state_id")
   
-  init_dep_plot <-  state_depletions %>%
+  init_dep_plot <-  state_depletions  |> 
     ggplot(aes(depletion)) +
     geom_histogram() +
     facet_wrap( ~ critter) + 
@@ -371,11 +366,15 @@ state_experiments <- state_experiments |>
     ),
     placement_error = c(0),
     observation_error = c(0)
-  ) %>%
-    group_by_at(colnames(.)[!colnames(.) %in% c("temp", "prop_mpa")]) %>%
-    nest() %>%
-    ungroup() %>%
-    mutate(placement_id = 1:nrow(.)) %>%
+  ) 
+  
+  groupers <- colnames(placement_experiments)
+  
+  placement_experiments <- placement_experiments |> 
+    group_by_at(groupers[!groupers %in% c("temp", "prop_mpa")]) |> 
+    nest()  |> 
+    ungroup()  |> 
+    mutate(placement_id = 1:n()) |> 
     unnest(cols = data)
   
   write_rds(placement_experiments, file = file.path(
@@ -386,11 +385,6 @@ state_experiments <- state_experiments |>
   write_rds(state_experiments |> select(-contains("starting_conditions")),
             file = file.path(results_dir, glue("{difficulty}_state_experiments.rds")))
   
-  # future::plan(future::multisession, workers = experiment_workers)
-  
-  # experiment_results <-
-  #   vector(mode = "list", length = nrow(placement_experiments))
-  #
   experiment_results <-
     vector(mode = "list", length = 2) # for memory-concious mode, only save reference and the current MPA size
   
@@ -412,7 +406,7 @@ state_experiments <- state_experiments |>
     
     # a <- Sys.time()
     tmp <- state_experiments |>
-      ungroup() %>%
+      ungroup()  |> 
       mutate(
         results = future_pmap(
           list(
@@ -502,21 +496,11 @@ state_experiments <- state_experiments |>
     experiment_results <- NULL
   }
   
-  # processed_sims <- process_sims(
-  #   difficulty_level = difficulty,
-  #   results_dir = results_dir,
-  #   drop_patches = drop_patches,
-  #   project = project,
-  #   experiment_results = experiment_results,
-  #   load_results = save_experiments
-  # )
 
-  
   components <- names(processed_sims[[1]])
   
   components <- components[!components %in% c("fauna_results", "difficulty")]
   
-
  # combine each component of the placement experiemnts into one dataframe per metric, in some way that may not be pretty but works
    
  flat_processed_sims <- flat_total_processed_sims <-  vector(mode = "list", length = length(components)) |> 
@@ -575,61 +559,7 @@ state_experiments <- state_experiments |>
     filter(fleet == "nature") |>
     select(ends_with("id"), critter, prop_mpa, name, percent_mpa_effect) |>
     pivot_wider(names_from = "name", values_from = "percent_mpa_effect")
-  
-  test <- fleet_outcomes |>
-    left_join(nature_outcomes,
-              by = join_by(state_id, placement_id, critter, prop_mpa))
-  
-  
-  quad_labels <- data.frame(
-    x = c(50, 50, -24, -24),
-    y = c(50, -50, 50, -50),
-    label = c("Win-Win", "Win-Lose", "Lose-Win", "Lose-Lose")
-  )
-  thirty_protected_plot <- test |>
-    filter(between(prop_mpa, 0.2, 0.4)) |>
-    ggplot(aes(biomass, catch)) +
-    geom_vline(xintercept = 0, color = "black") +
-    geom_hline(yintercept = 0, color = "black") +
-    geom_point(aes(color = f_v_m), alpha = 0.25, size = 3) +
-    scale_color_viridis_c(
-      "BAU Fishing Mortality",
-      breaks = c(0, .5),
-      labels = c("Low", "High"),
-      limits = c(0, .5),
-      option = "plasma",
-      guide = guide_colorbar(
-        frame.colour = "black",
-        ticks.colour = "black",
-        barwidth =  unit(11, "lines")
-      )
-    )  +
-    scale_x_continuous(name = "X Change in Species Biomass",
-                       oob = squish,
-                       limits = c(NA, 1)) +
-    scale_y_continuous(name = "X Change in Species Catch",
-                       oob = squish,
-                       limits = c(NA, 1)) +
-    theme(legend.position = "bottom") +
-    labs(caption = "20-40% of area in MPA")
-  
-  
-  
-  thirty_protected_plot
-  
-  ggsave(file.path(
-    fig_dir,
-    glue::glue("{difficulty}_thirty_protected_plot.pdf")
-  ), thirty_protected_plot)
-  
-  
-  thirty_protected_plot <- ggMarginal(thirty_protected_plot,
-                                      type = "histogram",
-                                      fill = "steelblue")
-  
-  thirty_protected_plot
-  toc()
-  
+
   rm(list = c("state_experiments"))
 } # close difficulty loop
 future::plan(future::sequential)
