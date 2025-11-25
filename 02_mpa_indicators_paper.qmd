@@ -44,7 +44,7 @@ library(here)
 
 Rcpp::sourceCpp(here("src", "select_contiguous_mpa.cpp"))
 
-prep_run(run_name = "v1.0",figure_text_size = 9, rx = 21, ry = 21, patch_area = 5^2) # loads packages and creates and returns some global variables for the analysis
+prep_run(run_name = "v1.0",figure_text_size = 11, rx = 21, ry = 21, patch_area = 5^2) # loads packages and creates and returns some global variables for the analysis
 
 project <- "indicators"
 
@@ -392,7 +392,8 @@ total_mpa_outcomes <- total_inds_and_outs |>
 
 ## Title Page
 
-Manuscript title: Evaluating common indicators of the effects of marine protected areas on conservation and catches
+Manuscript title: Evaluating common indicators of the effects of marine
+protected areas on conservation and catches
 
 Short Title: Evaluating indicators of MPA effects
 
@@ -413,16 +414,15 @@ of Environmental Science & Management, Santa Barbara, CA, 93106, USA
 Open Research statement: No data were collected for this study. This
 submission uses novel code, which is provided, per our requirements, in
 an external repository to be evaluated during the peer review process.
-The link to this external repository is https://doi.org/10.5281/zenodo.17308920 . This Zenodo repository will be upgraded to a permanent archive of the final results and paper upon
-publication, and an associated GitHub repository will also be made public. 
+The link to this external repository is
+https://doi.org/10.5281/zenodo.17308920 . This Zenodo repository will be
+upgraded to a permanent archive of the final results and paper upon
+publication, and an associated GitHub repository will also be made
+public.
 
-Key Words: 
-Marine Protected Areas,
-Conservation effectiveness,	
-Bio-economic modeling, 	
-Protected area evaluation,
-Fisheries management,
-Spillover dynamics,
+Key Words: Marine Protected Areas, Conservation effectiveness,
+Bio-economic modeling,\
+Protected area evaluation, Fisheries management, Spillover dynamics,
 Conservation–fishery trade-offs
 
 \newpage
@@ -485,40 +485,43 @@ works such as @hopf2024, @kerr2019, and @hilborn2024 evaluated specific
 combinations of indicators and effects). Understanding the reliability
 of indicators, and the variability of the underlying MPA effects they
 aim to measure, is critical for interpreting existing evaluations,
-designing effective monitoring strategies, and for evidence-based applied ecological decision-making.
+designing effective monitoring strategies, and for evidence-based
+applied ecological decision-making.
 
 This paper addresses two questions. We first analysed whether MPA
 effects on conservation and catches are likely to be variable enough to
 justify the need for empirical monitoring. We then tested the ability of
 several commonly used empirical indicators to reflect the actual effects
 of MPAs. We found that MPAs can have highly variable effects on
-conservation and catches depending on the specific social-ecological dynamics of the
-system in question, and that while some indicators reliably track this
-variability in some MPA effects, many do not.
+conservation and catches depending on the specific social-ecological
+dynamics of the system in question, and that while some indicators
+reliably track this variability in some MPA effects, many do not.
 
 ## Materials and Methods
 
 ### MPA Experiment Overview
 
 We used a simulation framework to model both the variability of MPA
-effects and the performance of empirical MPA indicators within complex social–ecological systems. We simulated a
-fishery system with a set of bio-economic traits. We then ran an MPA
-experiment on that system by generating two paired simulations identical
-in every way, except that one system contained a no-take MPA and the
-other did not. We then calculated the simulated effects of the MPA on a
-range of objectives based on the differences between the simulation with
-an MPA relative to the paired simulation without an MPA. Lastly, we
-calculated common empirical indicators of MPA performance from the
-simulation with the MPA, and compared these indicators to the true
-simulated effects. We then repeated this process multiple times with
-different randomly generated fishery states. The details of this process
-are explained below and illustrated in @fig-flow. See SI and @fig-case-study for a case study simulation of these processes. 
-
-
+effects and the performance of empirical MPA indicators within complex
+social–ecological systems. We simulated a fishery system with a set of
+bio-economic traits. We then ran an MPA experiment on that system by
+generating two paired simulations identical in every way, except that
+one system contained a no-take MPA and the other did not. We then
+calculated the simulated effects of the MPA on a range of objectives
+based on the differences between the simulation with an MPA relative to
+the paired simulation without an MPA. Lastly, we calculated common
+empirical indicators of MPA performance from the simulation with the
+MPA, and compared these indicators to the true simulated effects. We
+then repeated this process multiple times with different randomly
+generated fishery states. The details of this process are explained
+below and illustrated in @fig-flow. See SI and @fig-case-study for a
+case study simulation of these processes.
 
 ```{r}
 #| label: fig-flow
 #| fig-cap: Conceptual illustration of the process of simulating effects of MPAs, calculating empirical indicators, and comparing indicators to effects. Colored polygons in Step 2 indicate habitat distributions for each simulated species. See Methods section for detailed explanations of these steps. 
+#| out-width: "100%"
+#| dpi: 300
 
 knitr::include_graphics(here("imgs", "indicators-fig1-mockup.png"))
 
@@ -767,9 +770,9 @@ fit the model were N = 882.
 | Biomass Density Gradient (*near-far*) | Post-MPA ratio of *B* near MPA relative to far from MPA. Assumes no pre-existing differences in *B* between near and far patches. | @halpern2009 | $log(B_p) \sim \beta_0 + \pmb{\beta_1}NEAR_p$ |
 | Biomass Density Before-After Gradient (*near-far*) | Ratio of change in *B* after MPA implementation near to MPA relative to far from MPA. Assumes Parallel trends in *B* density near and far from MPA pre- and post-implementation. | @lynham2024 | $\begin{array}{l} log(B_{p,t})\sim \beta_0 + \\ \beta_1NEAR_p + \beta_2AFTER_t + \\ \pmb{\beta_3}NEAR_p \times AFTER_t \end{array}$ |
 
-: General structure of tested MPA indicators. Bolded $\pmb{\beta}$ denotes
-the estimated MPA effect. B = biomass; E = effort; ML = mean length.
-INSIDE/OUTSIDE indicate patches inside or outside MPA borders;
+: General structure of tested MPA indicators. Bolded $\pmb{\beta}$
+denotes the estimated MPA effect. B = biomass; E = effort; ML = mean
+length. INSIDE/OUTSIDE indicate patches inside or outside MPA borders;
 BEFORE/AFTER indicate time relative to implementation; NEAR/FAR refer to
 proximity to the MPA border. All models include covariates for unfished
 biomass and distance weighting (omitted here for clarity). Indicators
@@ -943,7 +946,8 @@ outcome_labeller <- c(
 
 sighbreaks <- seq(-1,2, by = 1)
 sighlabs <- paste0(sighbreaks * 100, "%")
-sighlabs[length(sighlabs)] <- "<span style='font-weight:600'>&ge;</span> 200%"
+sighlabs[length(sighlabs)] <- "≥200%"
+#sighlabs[length(sighlabs)] <- "<span style='font-weight:600'>&ge;</span> 200%"
 
 fig <- mpa_outcomes |>
   filter(observation_error == default_observation_error) |>
@@ -971,18 +975,13 @@ fig <- mpa_outcomes |>
   
   geom_hline(yintercept = 0, linetype = 2) +
   stat_interval(aes(color_ramp = after_stat(level),color = depletion_bin), .width = c(0.5,0.8,1), position = position_dodge(width = 0.666)) +
-
-  # stat_interval(aes(color_ramp = after_stat(level),color = depletion_bin), .width = c(0.5,0.8,1), position = "dodge") +
-  # stat_interval(aes(difficulty, value)) +
-  # geom_density(aes(value, after_stat(scaled),fill = difficulty, color = difficulty),alpha = 0.25) +
   facet_wrap(  ~ name, scales = "free_y", labeller = labeller(name = outcome_labeller)) + 
-  # facet_grid( depletion_bin ~ name, scales = "free_y", labeller = labeller(name = outcome_labeller)) + 
   scale_color_manual(name = "B/B0", values = rev(c("tomato", "purple", "steelblue"))) +
   scale_x_discrete(name = 'Seascape in MPA') +
   scale_y_continuous(name= "MPA Effect",limits = c(NA,2), oob = squish, breaks = sighbreaks, labels = sighlabs) +
   theme(legend.position = "bottom",
-        axis.text.x = element_text(size = 8, angle = 45, hjust = 1, vjust = 1),
-        axis.text.y = element_markdown(size = 8),
+        axis.text.x = element_text(size = 10, angle = 45, hjust = 1, vjust = 1),
+        axis.text.y = element_markdown(size = 10),
         panel.spacing.x = unit(2, "lines")) + 
   ggdist::scale_colour_ramp_discrete(name = "Quantile", labels = c("100%","80%", "50%")) 
 
@@ -1363,8 +1362,7 @@ figsaver(ca_rr_ind_plot)
 Our results show that MPA effects on conservation and catches can be
 highly variable in both magnitude and direction, underscoring the need
 for monitoring and evaluating MPAs rather than assuming their effects *a
-priori*. 
-
+priori*.
 
 ### Variability of MPA Effects
 
@@ -1515,6 +1513,25 @@ Ratio*s were associated with relatively worse *Biomass Outside* and
 
 <!--# Other studies have highlighted potential concerns with some common MPA indicators: @hopf2024 and @kerr2019 demonstrated that while indicators such as BACI designs and response ratios could track some conservation effects, they could also be misleading under certain conditions. @hilborn2024 demonstrated that the presence of gradients in fish biomass as a function of distance outside of an MPA were not necessarily reliable indicators of effects on catch or catch rates. @claudet2010 discussed qualitatively how failing to account for factors such as degree of enforcement, social responses, and habitat heterogeneity could reduce the reliability of MPA indicators. Our results confirm the conclusions of these studies, and expand on them by providing a comprehensive evaluation of the performance of multiple indicators as proxies for a range of MPA effects under a wide set of bio-economic states.  As noted in @hopf2024, the more MPAs affect ecosystems and fisheries outside their borders, the harder it becomes to accurately detect these effects using the kinds of inside-outside and near-far indicators commonly used in MPA evaluations. -->
 
+@hopf2024 noted that mean empirical response ratios across their case
+studies were highly uncertain, more so than anticipated from theory or
+earlier empirical work. @smith2024b found similarly high levels of
+uncertainty in their estimated response ratios. @hopf2024 argued that
+this unexpectedly high variation partly reflects their case studies
+spanning a broader set of social–ecological conditions—and therefore a
+wider range of true MPA effects—than previous analyses. We agree this is
+one likely contributor to the high variability and counter-intuitive
+signs observed in empirical MPA indicators. However, our results suggest
+an additional mechanism: in many cases, the relationship between an
+MPA’s true ecological outcomes and the indicators used to measure them
+may simply be very weak. As a consequence, MPAs with identical effects
+on biomass inside their borders can yield very different response
+ratios, even without any observation error (@fig-rr-performance). This
+phenomenon, layered onto variation in true effect sizes and further
+complexities such as observation error or imperfect compliance, may help
+explain why empirical MPA indicators often exhibit greater variability
+than expected.
+
 We concur with @hopf2024 that while purely empirical methods have value,
 efforts to estimate the effects of MPAs should ideally be placed in the
 context of the complexities and dynamics of marine social-ecological
@@ -1563,11 +1580,13 @@ between, with negative catch effects more common in our simulations.
 It is therefore important to quantify the costs and benefits produced by
 MPAs and update our understanding of effective design and use of MPAs as
 new evidence accumulates, focusing on outcomes achieved rather than area
-protected. Our results provide practical guidance for interpreting widely used indicators, helping bridge ecological theory, applied monitoring, and management decisions. We show that while imperfect, some empirical
-indicators—particularly inside–outside indicators such as response
-ratios—can be reasonably reliable indicators of conservation outcomes
-inside MPAs. However, few commonly used empirical indicators reliably
-track effects outside MPAs, especially on fishery catches, and
+protected. Our results provide practical guidance for interpreting
+widely used indicators, helping bridge ecological theory, applied
+monitoring, and management decisions. We show that while imperfect, some
+empirical indicators—particularly inside–outside indicators such as
+response ratios—can be reasonably reliable indicators of conservation
+outcomes inside MPAs. However, few commonly used empirical indicators
+reliably track effects outside MPAs, especially on fishery catches, and
 gradient-based near–far methods performed particularly poorly for any
 effect evaluated here.
 
@@ -1589,44 +1608,41 @@ of achieving positive and equitable outcomes for nature and people.
 ## Abstract
 
 Marine protected areas (MPAs) are spatial management tools designed to
-ideally benefit diverse conservation and social objectives, including
+ideally benefit diverse conservation and other social objectives, including
 biodiversity, food security, and climate resilience. Because these
 objectives are often difficult to measure directly, evaluations of MPAs
-typically rely on simplified empirical indicators—such as biomass inside
+typically rely on empirical indicators—such as biomass inside
 versus outside MPAs, or gradients in biomass outside boundaries—as
-proxies for broader MPA effects. Yet in complex social–ecological
+proxies for broader MPA effects. But, in complex social–ecological
 systems, even well-measured indicators may fail to capture the true
 causal effects of MPAs.
 
-Using a large-scale simulation framework, we explored variability in MPA
-effects and assessed whether common indicators reliably tracked intended
+Using a large-scale simulation framework, we examined variability in MPA
+effects and tested whether common indicators reliably tracked intended
 objectives of protected areas. We show that similarly sized MPAs can
-produce vastly different effects for conservation (generally positive)
-and fishery catches (more frequently negative) depending on factors such
-as fishing fleet dynamics and habitat heterogeneity within and across
-species. The degree of correlation between common empirical indicators
-of MPA performance and the true effects of an MPA also varied widely.
-Indicators such as *Biomass Density Response Ratios* were positively
-correlated with the effect of MPAs on biomass inside their borders
-(Spearman's $\rho$ =
+produce widely differing effects on conservation (generally positive)
+and fishery catches (often negative), depending on factors such as
+fishing fleet dynamics and habitat heterogeneity within and across
+species. Correlations between empirical indicators and the true effects
+of MPAs varied substantially. Indicators such as *Biomass Density
+Response Ratios* were positively correlated with the effect of MPAs on
+biomass inside their borders (Spearman’s $\rho$ =
 `r get_rho("Biomass Density Response Ratio","Biomass Inside")`), but
 slightly negatively correlated with the effect of MPAs on total fishery
 catches ($\rho$ =
 `r get_rho("Biomass Density Response Ratio","Catch")`). Common
-indicators of spillover, such as gradients in biomass density near MPAs
-relative to far from MPAs, had little correlation with any simulated
-conservation or catch outcome (absolute value of Spearman's $\rho$ all
-$\leq$ 0.2).
+spillover indicators—such as biomass gradients near versus far from MPA
+borders—showed little correlation with any simulated conservation or
+catch outcome (absolute Spearman’s $\rho \leq 0.2$).
 
-The high variability in simulated MPA effects highlights the importance
-of effective ecological and economic monitoring programs. We found that
-many indicators currently measured in and around MPAs may contain little
-information on macro-level effects such as total changes in fish
-populations or fishery catches. The next generation of MPA research
-needs interdisciplinary research to develop practical and reliable
-methods for tracking the effects of MPAs. Doing so will help ensure that
-the planned rapid and global expansion of MPAs has the best chance of
-delivering positive and equitable outcomes for nature and people.
+ We found that many indicators commonly measured in and around MPAs may contain limited
+information about macro-level outcomes such as total changes in fish
+populations or fishery catches, helping explain the high variability
+observed in empirical MPA indicators globally. Advancing the science and practice of MPAs
+will require interdisciplinary efforts to develop practical and reliable
+methods for tracking MPA effects. Such progress is crucial to ensuring
+that the rapid global expansion of MPAs achieves positive and equitable
+outcomes for nature and people.
 
 \newpage
 
@@ -2799,7 +2815,9 @@ fig <- quadrant_outcomes |>
   coord_flip() +
   facet_grid(depletion_bin ~ size_bin) +
   scale_x_discrete(name = "") + 
-  scale_y_continuous(name = "Percent of Simulations", labels = scales::percent)
+  scale_y_continuous(name = "Percent of Simulations", labels = scales::percent) + 
+  theme(axis.text.y = element_text(size = 6),
+        axis.text.x = element_text(size = 6))
 
 figsaver(fig)
 
@@ -2830,7 +2848,7 @@ outcome_labeller <- c(
 
 sighbreaks <- seq(-1,2, by = 1)
 sighlabs <- paste0(sighbreaks * 100, "%")
-sighlabs[length(sighlabs)] <- "<span style='font-weight:600'>&ge;</span> 200%"
+sighlabs[length(sighlabs)] <- "≥200%"
 
 fig <- total_mpa_outcomes |>
   filter(observation_error == default_observation_error) |>
@@ -2875,8 +2893,8 @@ figsaver(fig)
 
 ```{r}
 #| label: fig-rho-error-bias-total
-#| fig-cap: 'Spearman correlations $\rho$ (A) and $\rho^2$ (B) between indicators (y-axis) and effects (x-axis) at the level of total change across all specices or fleets across all simulations. Root mean squared error (RMSE, C) and  mean error (Bias, D) between indicators (y-axis) and effects (x-axis) at the level of individual species and fleets across all simulations. Blue plain text indicates *inside-outside* indicators, red italic axis labels indicates a *near-far* indicator. Text shows the value of the metric in question, also reflected in the background color of each cell according to the associated colorbar legend.'
-#| fig-height: 8
+#| fig-cap: 'Spearman correlations $\rho$ (A) and $\rho^2$ (B) between indicators (y-axis) and MPA effects (x-axis) at the level of total change across all species and fleets across all simulations. Root mean squared error (RMSE, C) and  mean error (Bias, D) between indicators (y-axis) and effects (x-axis) at the level of individual species and fleets across all simulations.  Plain text y-axis labels indicates *inside-outside* indicators, *italic* y-axis labels indicate a *near-far* indicator. Text shows the value of the metric in question, also reflected in the background color of each cell according to the associated colorbar legend.'
+#| fig-height: 6
 
 total_mape_meep_rho <- total_comparison |> 
   filter(!is.na(percent_mpa_effect) & !is.na(indicator_value),
@@ -2998,9 +3016,12 @@ rm(list = c("a","b", "dd","cc"))
 
 ```
 
+\clearpage
+
 ```{r}
 #| label: fig-total-rr-performance
 #| fig-cap: "Simulated response ratios (x-axis) plotted against total simulated MPA effects (y-axis), for subset of scenarios more reflective of the California MPA network. Simulations selected such that distribution of simulated response ratios roughly matches distribution of empirical response ratios for targeted finfish in California MPAs, reported in @smith2024b."
+#| fig-height: 6
 
 total_rr_performance <- total_comparison |>
     filter(observation_error == default_observation_error) |> 
